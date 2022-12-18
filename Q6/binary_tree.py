@@ -70,7 +70,7 @@ class Node(object):
         '''
         Encotrar o menor valor a partir de uma chave
         '''
-        while(key.left is not None):
+        while (key.left is not None):
             key = key.left
         return key
 
@@ -133,13 +133,26 @@ class Node(object):
         return lines, n + m + u, max(p, q) + 2, n + u // 2
 
 
-# root
-root = Node(10)
-# root.printTree()
-root.insert(5)
-root.insert(15)
-root.insert(20)
-root.insert(14)
-root.display()
-root.removeABB(root, 15)
-root.display()
+# cria árvore a partir da raiz
+tree = Node(10)
+# insere nós a partir da raiz
+tree.insert(5)
+tree.insert(15)
+tree.insert(20)
+tree.insert(14)
+tree.insert(18)
+tree.insert(6)
+tree.insert(4)
+tree.insert(7)
+# Exemplos de remoção
+print('Árvore original:')
+tree.display()
+print('Árvore após remoção do 6:')
+tree.removeABB(tree, 6)
+tree.display()
+print('Árvore após remoção do 4:')
+tree.removeABB(tree, 4)
+tree.display()
+print('Árvore após remoção do 15:')
+tree.removeABB(tree, 15)
+tree.display()
