@@ -7,7 +7,7 @@
 
 ### Começando
 
-Antes de começar a gerar os modelos de AM, é necessário instalar alguns pacotes pip necessários para a execução de alguns scripts. O comando abaixo pode ser utilizado. 
+Antes de começar a executar as implementações do projeto, é necessário instalar alguns pacotes pip necessários para a execução de alguns scripts. O comando abaixo pode ser utilizado. 
 
 ```sh
 pip3 install -r requirements.txt
