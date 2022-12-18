@@ -53,44 +53,42 @@ def quicksort(z):
 
 
 def heapify(arr, n, i):
-    largest = i  # Initialize largest as root
+    largest = i  # inicializar
     l = 2 * i + 1  # left = 2*i + 1
     r = 2 * i + 2  # right = 2*i + 2
 
- # See if left child of root exists and is
- # greater than root
+ # Verificar se é maior que o do lado esquedo
 
     if l < n and arr[i] < arr[l]:
         largest = l
 
- # See if right child of root exists and is
- # greater than root
+ # Verificar se é maior na direita
 
     if r < n and arr[largest] < arr[r]:
         largest = r
 
- # Change root, if needed
+ # trocar se necessario
 
     if largest != i:
         (arr[i], arr[largest]) = (arr[largest], arr[i])  # swap
 
-  # Heapify the root.
+  # Heapsort
 
         heapify(arr, n, largest)
 
 
-# The main function to sort an array of given size
+# Função principal
 
 def heapSort(arr):
     n = len(arr)
 
- # Build a maxheap.
- # Since last parent will be at ((n//2)-1) we can start at that location.
+ # construindo maxheap
+ # localização ((n//2)-1) 
 
     for i in range(n // 2 - 1, -1, -1):
         heapify(arr, n, i)
 
- # One by one extract elements
+ # extrair elementos um por um
 
     for i in range(n - 1, 0, -1):
         (arr[i], arr[0]) = (arr[0], arr[i])  # swap
@@ -98,28 +96,28 @@ def heapSort(arr):
 
 
 def countingSort(inputArray):
-    # Find the maximum element in the inputArray
+    # encontrar valor maximo
     maxElement = max(inputArray)
 
     countArrayLength = maxElement+1
 
-    # Initialize the countArray with (max+1) zeros
+    # iniciar countsort com (max+1) zeros
     countArray = [0] * countArrayLength
 
-    # Step 1 -> Traverse the inputArray and increase
-    # the corresponding count for every element by 1
+    # Passo 1 -> Atravesse o inputArray e aumente
+      # a contagem correspondente para cada elemento por 1
     for el in inputArray:
         countArray[el] += 1
 
-    # Step 2 -> For each element in the countArray,
-    # sum up its value with the value of the previous
-    # element, and then store that value
-    # as the value of the current element
+    # Passo 2 -> Para cada elemento no countArray,
+     # soma seu valor com o valor do anterior
+     # elemento e, em seguida, armazene esse valor
+     # como o valor do elemento atual
     for i in range(1, countArrayLength):
         countArray[i] += countArray[i-1]
 
-    # Step 3 -> Calculate element position
-    # based on the countArray values
+    # Passo 3 -> Calcular a posição do elemento
+     # com base nos valores de countArray
     outputArray = [0] * len(inputArray)
     i = len(inputArray) - 1
     while i >= 0:
