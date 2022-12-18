@@ -1,4 +1,3 @@
-import numpy as np
 class Node(object):
     def __init__(self, data) -> None:
         '''
@@ -26,20 +25,68 @@ class Node(object):
         else:
             self.key = key
 
-    # def remove(self, root, key) -> None:
-    #     '''
-    #     Remove um nó/chave na árvore a partir da raiz
-    #     '''
-    #     if self.key == key and (self.key.right == None and self.key.left == None):
+    def removeABB(self, root, key) -> object:
+        '''
+        Remove um nó/chave na árvore a partir da raiz
+        '''
+        # Raiz não passada ou não encontrada
+        if root is None:
+            print(f'Valor não {key} encontrado na árvore!')
+            return root
+
+        # chave menor que a raiz, então varre subárvore da esquerda
+        if key < root.key:
+            root.left = self.removeABB(root.left, key)
+
+        # chave maior que a raiz, então varre subárvore da direita
+        elif key > root.key:
+            root.right = self.removeABB(root.right, key)
+
+        # chave igual a raiz, elemento a ser removido encontrado
+        else:
+            # caso em que a raiz possui apenas um nó filho
+            if root.left is None:
+                tmp = root.right
+                root = None
+                return tmp
+            elif root.right is None:
+                tmp = root.left
+                root = None
+                return tmp
+
+            # caso a raiz possua dois nós filhos
+            # acha o menor valor à direita
+            tmp = self.minValueRight(root.right)
+
+            # substitui a chave pelo menor valor à direita
+            root.key = tmp.key
+
+            # deleta o valor substituido
+            root.right = self.removeABB(root.right, tmp.key)
+
+        return root
+
+    def minValueRight(self, key):
+        '''
+        Encotrar o menor valor a partir de uma chave
+        '''
+        while (key.left is not None):
+            key = key.left
+        return key
 
     def display(self):
+        '''
+        Imprime a árvore no terminal
+        '''
         lines, *_ = self._display_aux()
         for line in lines:
             print(line)
 
     def _display_aux(self):
-        """Returns list of strings, width, height, and horizontal coordinate of the root."""
-        # No child.
+        '''
+        Retorna a lista de strings, comprimento, altura e coordenada horizontal da raiz
+        '''
+        # Sem filho
         if self.right is None and self.left is None:
             line = '%s' % self.key
             width = len(line)
@@ -47,7 +94,7 @@ class Node(object):
             middle = width // 2
             return [line], width, height, middle
 
-        # Only left child.
+        # Apenas filhos à esquerta
         if self.right is None:
             lines, n, p, x = self.left._display_aux()
             s = '%s' % self.key
@@ -57,7 +104,7 @@ class Node(object):
             shifted_lines = [line + u * ' ' for line in lines]
             return [first_line, second_line] + shifted_lines, n + u, p + 2, n + u // 2
 
-        # Only right child.
+        # Apenas filhos à direita
         if self.left is None:
             lines, n, p, x = self.right._display_aux()
             s = '%s' % self.key
@@ -67,7 +114,7 @@ class Node(object):
             shifted_lines = [u * ' ' + line for line in lines]
             return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
 
-        # Two children.
+        # Filhos à esquerda e à direita
         left, n, p, x = self.left._display_aux()
         right, m, q, y = self.right._display_aux()
         s = '%s' % self.key
@@ -85,70 +132,27 @@ class Node(object):
             [a + u * ' ' + b for a, b in zipped_lines]
         return lines, n + m + u, max(p, q) + 2, n + u // 2
 
-def deci(tamanho,list_k, lista_kProb, lista_d,lista_dProb):
-    soma = 0
-    t= 0
-    for i in range(0,len(lista_kProb)):
-        z = max(lista_kProb)
-        x = lista_kProb.index(z)
-        #print(lista_kProb)
-        t = t+1
-        if t <=2:
-            soma = soma + z
-            print(lista_kProb)
-        if t>=3:
-            tamanho = 2
-            lista_aux = [i * tamanho for i in lista_kProb]
-            soma = soma + max(lista_aux)
-            print(lista_aux)
-        if t>=4:
-            tamanho = 3
-            lista_aux = [i * tamanho for i in lista_kProb]
-            soma = soma + max(lista_aux)
-            print(lista_aux)
-        lista_aux =[]
-        root.insert(list_k[x])
-        list_k.remove(list_k[x])
-        lista_kProb.remove(z)
-        print(soma)
-        #print(lista_kProb)
-        
-    print("fim dos K")
-    tamanho = 2
-    t = 0
-    for i in range(0,len(lista_dProb)):
 
-        z = max(lista_dProb)
-        x = lista_dProb.index(z)
-        #print(lista_dProb)
-        t =t +1
-        if t<=3:
-            tamanho = 2
-            lista_aux = [i * tamanho for i in lista_dProb]
-            soma = soma + max(lista_aux)
-            print(lista_aux)
-        if t>3:
-            tamanho =3
-            lista_aux = [i * tamanho for i in lista_dProb]
-            soma = soma + max(lista_aux)
-            print(lista_aux)
-        lista_aux =[]
-        root.insert(lista_d[x])
-        lista_d.remove(lista_d[x])
-        lista_dProb.remove(z)
-        print(soma)
-        #print(lista_dProb)
-        
-    print("fim dos D")
-    soma = soma+1
-    return soma
-# root
-tamanho = 0
-root = Node("20")
-list_k = ["10","30","40","50"]
-lista_kProb = [0.15,0.05,0.10,0.20]
-lista_d = ["1","11","22","33","44","55"]
-lista_dProb =[0.05,0.1,0.05,0.05,0.05,0.1]
-soma = deci(tamanho, list_k, lista_kProb, lista_d,lista_dProb)
-print (soma)
-root.display()
+# cria árvore a partir da raiz
+tree = Node(10)
+# insere nós a partir da raiz
+tree.insert(5)
+tree.insert(15)
+tree.insert(20)
+tree.insert(14)
+tree.insert(18)
+tree.insert(6)
+tree.insert(4)
+tree.insert(7)
+# Exemplos de remoção
+print('Árvore original:')
+tree.display()
+print('Árvore após remoção do 6:')
+tree.removeABB(tree, 6)
+tree.display()
+print('Árvore após remoção do 4:')
+tree.removeABB(tree, 4)
+tree.display()
+print('Árvore após remoção do 15:')
+tree.removeABB(tree, 15)
+tree.display()
