@@ -4,6 +4,7 @@
 A = ((5**(1/2) - 1) / 2)
 # define m | tamanho da tabela
 m = 1000
+
 # k == 61
 k = 61
 # h(k)
