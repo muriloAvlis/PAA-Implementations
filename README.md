@@ -9,7 +9,7 @@
 
 Antes de começar a gerar os modelos de AM, é necessário instalar alguns pacotes pip necessários para a execução de alguns scripts. O comando abaixo pode ser utilizado. 
 
-```python
+```sh
 pip3 install -r requirements.txt
 ```
 
@@ -17,12 +17,12 @@ pip3 install -r requirements.txt
 
 Depois da instalação dos requisitos, clone este repositório utilizando o seguinte comando.
 
-```bash
+```sh
 git clone https://github.com/muriloAvlis/PAA-Implementations.git
 ```
 
 Após isso, o script da implementação pode executado, conforme mostrado abaixo.
 
-```python
+```sh
 python3 Q2/mergeReverse.py
 ```
